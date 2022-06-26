@@ -1,5 +1,6 @@
 const { network, ethers } = require("hardhat");
 const { networkConfig, developmentChains } = require("../helper-hardhat-config");
+const { verify } = require("../utils/verify");
 
 /* VRF Mock Vars */
 const BASE_FEE = ethers.utils.parseEther("0.25");
@@ -53,19 +54,10 @@ const main = async function () {
 
     const Raffle = await ethers.getContractFactory("Raffle")
     const raffle = await Raffle.deploy(...args)
-    // const Raffle = await deploy("Raffle", {
-    //     from: deployer,
-    //     args,
-    //     log: true,
-    //     waitConfirmations: 1
-    // })
 
-    /*
-     TODO: Etherscan verify task 
      if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
          await verify(raffle.address, args)
      }
-    */
 }
 
 main()
