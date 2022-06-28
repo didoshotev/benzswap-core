@@ -1,12 +1,14 @@
-require("dotenv").config()
+import "./tasks/block-number"
+import "dotenv/config"
 import { HardhatUserConfig, task } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers"
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
-require("hardhat-deploy");
-require("hardhat-contract-sizer");
+import "hardhat-deploy"
+import "hardhat-contract-sizer"
 
 
 interface customConfig extends HardhatUserConfig { 
@@ -14,7 +16,7 @@ interface customConfig extends HardhatUserConfig {
 }
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL;
-// const PRIVATE_KEY = ;
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY;
 
 
 const accounts = [ 
@@ -30,8 +32,14 @@ const config: any = {
             chainId: 1337,
             accounts,
             gasPrice: 225000000000,
+            saveDeployments: true
             // blockConfirmations: 1    
         },
+        // localhost: {
+        //     url: "http://127.0.0.1:8545/",
+        //     chainId: 31337,
+        //     accounts,
+        // },
         rinkeby: { 
             chainId: 4,
             url: RINKEBY_RPC_URL,
@@ -52,8 +60,14 @@ const config: any = {
     },
 
     gasReporter: {
-        enabled: process.env.REPORT_GAS !== undefined,
+        // enabled: process.env.REPORT_GAS !== undefined,
+        enabled: false,
+        output: "gas-report.txt",
         currency: "USD",
+        noColors: true,
+        currenct: "USD",
+        coinmarketcap: COINMARKETCAP_API_KEY,
+        // token: "AVAX",
     },
     
     etherscan: {
