@@ -47,7 +47,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     /* Events */
     event RaffleEntered(address indexed player);
     event RequestedRaffleWinner(uint256 indexed requestId);
-    event WinnerPicker(address indexed winner);
+    event WinnerPicked(address indexed winner);
 
     constructor(
         address _vrfCoordinatorV2,
@@ -82,6 +82,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     function fulfillRandomWords(
         uint256, /*_requestId */
         uint256[] memory _randomWords
+
     ) internal override {
         // s_players size = 10
         // randomNumber 202
@@ -98,7 +99,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         if (!success) {
             revert Raffle__TransferFailed();
         }
-        emit WinnerPicker(recentWinner);
+        emit WinnerPicked(recentWinner);
     }
 
     /* 
@@ -130,7 +131,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         upkeepNeeded = isOpen && hasIntervalPassed && hasPlayers && hasBalance;
     }
 
-    // requestRandomWinner
+    // request a random winner
     function performUpkeep(
         bytes calldata /* performData */
     ) external override {
@@ -155,6 +156,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
             i_callbackGasLimit,
             NUM_WORDS
         );
+        // TODO: remove event - fix test
         emit RequestedRaffleWinner(requestId);
     }
 

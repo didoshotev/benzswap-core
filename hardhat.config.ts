@@ -73,6 +73,10 @@ const config: any = {
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
     },
+
+    mocha: { 
+        timeout: 500000 // 200 seconds
+    }
 };
 
 export default config;
