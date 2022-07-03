@@ -77,7 +77,6 @@ export const deployRaffle = async function () {
     raffle = await new Raffle__factory(deployer).deploy(
         ...args
     )
-    console.log('raffle: ', raffle.address);
 
     if (!helper_config.developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         await verify(raffle.address, args)

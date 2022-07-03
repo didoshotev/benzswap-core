@@ -134,7 +134,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     function performUpkeep(
         bytes calldata /* performData */
     ) external override {
-        // request the ranodm number
+        // request the random number
         // Once we get it, do something it
         // 2 tx process
         (bool upkeepNeeded, ) = checkUpkeep("");
@@ -185,5 +185,9 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
     function getLatestTimeStamp() public view returns (uint256) {
         return s_lastTimeStamp;
+    }
+
+    function getInterval() public view returns(uint256) { 
+        return s_interval;
     }
 }
