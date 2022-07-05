@@ -1,7 +1,8 @@
 {
   "name": "hardhat-project",
   "scripts": {
-    "single-test": "npx hardhat test --grep"
+    "single-test": "npx hardhat test --grep",
+    "node": "npx hardhat node"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.4.1",

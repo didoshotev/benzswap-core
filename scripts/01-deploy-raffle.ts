@@ -2,7 +2,11 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { Raffle, Raffle__factory, VRFCoordinatorV2Interface, VRFCoordinatorV2Mock, VRFCoordinatorV2Mock__factory } from "../typechain";
 const { network, ethers } = require("hardhat");
 import helper_config from "../helper-hardhat-config"
+import { Contract } from "ethers";
 const { verify } = require("../utils/verify");
+// import RAFFLE_ABI from "../artifacts/contracts/Raffle/Raffle.sol/Raffle";
+// import test from "../artifacts/contracts/Raffle/Raffle.sol/"
+const RAFFLE_ABI = require("../abi/Raffle_abi");
 
 
 /* VRF Mock Vars */
@@ -14,11 +18,12 @@ const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("2")
 
 export const deployRaffle = async function () {
     const [deployer, player1]: SignerWithAddress[] = await ethers.getSigners()
-
+    
     const chainId = network.config.chainId;
     let vrfCoordinatorV2Address, subscriptionId
     let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock | null = null
     let raffle: Raffle
+    console.log('chainId: ', chainId);
 
     if (helper_config.developmentChains.includes(network.name)) {
 
@@ -42,7 +47,6 @@ export const deployRaffle = async function () {
             console.log('no such events in vrfCoordinatorV2Mock.fundSubscription');
             return;
         }
-
         // console.log('------------------------Successfully funded------------------------');
         // console.log("OLD balance: ", ethers.utils.formatEther(txFundReceipt.events[0].args[1]));
         // console.log("NEW balance: ", ethers.utils.formatEther(txFundReceipt.events[0].args[2]));
@@ -51,7 +55,6 @@ export const deployRaffle = async function () {
         vrfCoordinatorV2Address = helper_config.networkConfig[chainId]["vrfCoordinatorV2"]
         subscriptionId = helper_config.networkConfig[chainId]["subscriptionId"] // you can make it programatically
     }
-
 
     const enteranceFee = helper_config.networkConfig[chainId]["enteranceFee"]
     const gasLane = helper_config.networkConfig[chainId]["gasLane"]
@@ -74,10 +77,12 @@ export const deployRaffle = async function () {
     // })
     // const raffle = ethers.getContract("Raffle")
 
-    raffle = await new Raffle__factory(deployer).deploy(
-        ...args
-    )
+    // raffle = await new Raffle__factory(deployer).deploy(
+    //     ...args
+    // )
 
+    raffle = new Contract("0xffB7f1CdF5be15b34Da40C52B0657f8caC8D4A9c", RAFFLE_ABI, deployer) as Raffle
+    
     if (!helper_config.developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         await verify(raffle.address, args)
     }
@@ -87,11 +92,11 @@ export const deployRaffle = async function () {
     }
 }
 
-// deployRaffle()
-//     .then(() => process.exit(0))
-//     .catch(error => {
-//         console.error(error)
-//         process.exit(1)
-//     })
+deployRaffle()
+    .then(() => process.exit(0))
+    .catch(error => {
+        console.error(error)
+        process.exit(1)
+    })
 
 module.exports.tags = ["all", "raffle"]
