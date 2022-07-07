@@ -29,7 +29,7 @@ const config: any = {
     
     networks: {
         hardhat: {
-            chainId: 1337,
+            chainId: 31337,
             accounts,
             gasPrice: 225000000000,
             saveDeployments: true

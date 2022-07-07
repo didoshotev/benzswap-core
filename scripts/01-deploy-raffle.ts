@@ -77,11 +77,12 @@ export const deployRaffle = async function () {
     // })
     // const raffle = ethers.getContract("Raffle")
 
-    // raffle = await new Raffle__factory(deployer).deploy(
-    //     ...args
-    // )
-
-    raffle = new Contract("0xffB7f1CdF5be15b34Da40C52B0657f8caC8D4A9c", RAFFLE_ABI, deployer) as Raffle
+    raffle = await new Raffle__factory(deployer).deploy(
+        ...args
+    )
+    console.log('new raffle address: ', raffle.address);
+        
+    // raffle = new Contract("0xffB7f1CdF5be15b34Da40C52B0657f8caC8D4A9c", RAFFLE_ABI, deployer) as Raffle
     
     if (!helper_config.developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         await verify(raffle.address, args)
@@ -90,13 +91,14 @@ export const deployRaffle = async function () {
     if (helper_config.developmentChains.includes(network.name)) {
         return { raffle, vrfCoordinatorV2Mock }
     }
+    console.log('SUCCESS');
 }
 
-deployRaffle()
-    .then(() => process.exit(0))
-    .catch(error => {
-        console.error(error)
-        process.exit(1)
-    })
+// deployRaffle()
+//     .then(() => process.exit(0))
+//     .catch(error => {
+//         console.error(error)
+//         process.exit(1)
+//     })
 
 module.exports.tags = ["all", "raffle"]
