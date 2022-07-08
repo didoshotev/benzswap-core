@@ -24,6 +24,7 @@ export const deployRaffle = async function () {
     let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock | null = null
     let raffle: Raffle
     console.log('chainId: ', chainId);
+    console.log("CONFIG: ", network);
 
     if (helper_config.developmentChains.includes(network.name)) {
 
@@ -94,11 +95,11 @@ export const deployRaffle = async function () {
     console.log('SUCCESS');
 }
 
-// deployRaffle()
-//     .then(() => process.exit(0))
-//     .catch(error => {
-//         console.error(error)
-//         process.exit(1)
-//     })
+deployRaffle()
+    .then(() => process.exit(0))
+    .catch(error => {
+        console.error(error)
+        process.exit(1)
+    })
 
 module.exports.tags = ["all", "raffle"]

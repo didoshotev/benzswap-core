@@ -2,7 +2,8 @@
   "name": "hardhat-project",
   "scripts": {
     "single-test": "npx hardhat test --grep",
-    "node": "npx hardhat node"
+    "node": "npx hardhat node",
+    "deploy": "npx hardhat run scripts/09-update-client-ui.ts"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.4.1",

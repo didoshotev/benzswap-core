@@ -26,20 +26,21 @@ const accounts = [
 
 const config: any = {
     solidity: "0.8.7",
+    defaultNetwork: "hardhat",
     
     networks: {
         hardhat: {
             chainId: 31337,
             accounts,
             gasPrice: 225000000000,
-            saveDeployments: true
+            saveDeployments: false,
             // blockConfirmations: 1    
         },
-        // localhost: {
-        //     url: "http://127.0.0.1:8545/",
-        //     chainId: 31337,
-        //     accounts,
-        // },
+        localhost: {
+            url: "http://127.0.0.1:8545/",
+            chainId: 1337,
+            // accounts,
+        },
         rinkeby: { 
             chainId: 4,
             url: RINKEBY_RPC_URL,
