@@ -3,6 +3,7 @@
   "scripts": {
     "single-test": "npx hardhat test --grep",
     "node": "npx hardhat node",
+    "start-node": "npx hardhat compile && npx hardhat node",
     "deploy": "npx hardhat run scripts/09-update-client-ui.ts"
   },
   "devDependencies": {
@@ -29,8 +30,10 @@
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.9",
     "hardhat": "^2.9.9",
+    "hardhat-abi-exporter": "^2.10.0",
     "hardhat-contract-sizer": "^2.5.1",
     "hardhat-deploy": "^0.11.10",
+    "hardhat-erc1820": "^0.1.0",
     "hardhat-gas-reporter": "^1.0.8",
     "prettier": "^2.6.2",
     "prettier-plugin-solidity": "^1.0.0-beta.19",
@@ -38,6 +41,7 @@
     "solidity-coverage": "^0.7.21",
     "ts-node": "^10.7.0",
     "typechain": "^5.2.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "yarn": "^1.22.19"
   }
 }
