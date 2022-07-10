@@ -7,6 +7,8 @@ The project comes with a sample contract, a test for that contract, a sample scr
 Try running some of the following tasks:
 
 ```shell
+yarn run deploy hardhat NETWORK_NAME (hh options)
+
 npx hardhat accounts
 npx hardhat compile
 npx hardhat clean

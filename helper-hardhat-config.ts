@@ -34,6 +34,7 @@ const networkConfig:INetworkConfigInfo = {
 const developmentChains = ["hardhat", "localhost"]
 const VERIFICATION_BLOCK_CONFIRMATIONS = 2
 const frontEndContractsFile = "../benzswap-ui/constants/contractAddresses.json"
+const frontEndTypes = "../benzswap-ui/types" 
 
 export {
     networkConfig,
@@ -41,5 +42,6 @@ export {
     VERIFICATION_BLOCK_CONFIRMATIONS,
     INetworkConfigItem,
     INetworkConfigInfo,
-    frontEndContractsFile
+    frontEndContractsFile,
+    frontEndTypes
 }
