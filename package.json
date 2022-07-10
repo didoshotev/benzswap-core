@@ -4,7 +4,8 @@
     "single-test": "npx hardhat test --grep",
     "node": "npx hardhat node",
     "start-node": "npx hardhat compile && npx hardhat node",
-    "deploy": "hardhat deploy --write true --network"
+    "deploy": "hardhat deploy --write true --network",
+    "test": "npx hardhat test"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.4.1",

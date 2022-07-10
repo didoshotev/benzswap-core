@@ -2,41 +2,28 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { assert, expect } from "chai";
 import { ethers, network } from "hardhat";
 import { Raffle, VRFCoordinatorV2Mock } from "../../typechain";
-import helper_config from "../../helper-hardhat-config"
-import { deployRaffle } from "../../scripts/01-deploy-raffle";
+import { developmentChains, networkConfig } from "../../helper-hardhat-config"
 import { BigNumber } from "ethers";
 
 
-if (!(network.config.chainId && network.config.chainId in helper_config.networkConfig)) {
+if (!(network.config.chainId && network.config.chainId in networkConfig)) {
     console.log('Invalid Test Network');
     describe.skip
 }
 
-describe("TEST", () => {
-    console.log('in STAGE');
-})
-
 describe("Raffle", async function () {
-    let chainId: number;
+    let chainId: number | undefined;
     let raffle: Raffle;
     let raffleEnteranceFee: BigNumber;
-    let interval: BigNumber;
     let deployer: SignerWithAddress;
     let player1: SignerWithAddress;
 
     beforeEach(async function () {
         [deployer, player1] = await ethers.getSigners();
 
-
-        if (!network.config.chainId) {
-            console.log('INVALID NETWORK');
-            return;
-        }
-
-        chainId = network.config.chainId;
-        raffle = await ethers.getContract("Raffle");
+        chainId = network.config?.chainId;
+        raffle = await ethers.getContract<Raffle>("Raffle");
         raffleEnteranceFee = await raffle.getEntranceFee();
-        // interval = await raffle.getInterval();
     })
 
     describe("fulfillRandomWords", function () {
