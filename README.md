@@ -4,7 +4,9 @@ This project demonstrates an advanced Hardhat use case, integrating other tools 
 
 The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
 
-Try running some of the following tasks:
+Raffle Rinkeby: https://rinkeby.etherscan.io/address/0x98eb4cdf17a61453dc0521395145e22cb2ff963a
+
+Try running some of the following scripts:
 
 ```shell
 yarn run deploy hardhat NETWORK_NAME (hh options)
