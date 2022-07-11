@@ -10,6 +10,8 @@ export const avalancheFujiJsonRPCUrl: string =
 export const rinkebyJsonRPCUrl: string = process.env.RINKEBY_RPC_URL || ""
 
 
+const test_net_accounts = accounts.map((account: any) => account.privateKey)
+
 export const networks: NetworksUserConfig = {
     coverage: {
         url: "http://127.0.0.1:8555",
@@ -29,10 +31,12 @@ export const networks: NetworksUserConfig = {
     },
     rinkeby: { 
         chainId: 4,
+        accounts: test_net_accounts,
         url: rinkebyJsonRPCUrl
     },
     fuji: {
         chainId: 43113,
+        accounts: test_net_accounts,
         url: avalancheFujiJsonRPCUrl,
     },
 }

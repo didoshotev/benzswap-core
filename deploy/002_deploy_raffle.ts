@@ -21,7 +21,8 @@ const deployMocks: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const chainId = network.config.chainId
     // const chainId = 31337
     let vrfCoordinatorV2Address, subscriptionId
-
+    console.log("Deployer: ", deployer);
+    
 
     if (chainId == 31337) {
         // create VRFV2 Subscription
@@ -41,6 +42,7 @@ const deployMocks: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
         // Our mock makes it so we don't actually have to worry about sending fund
         await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, FUND_AMOUNT)
     } else {
+        console.log("DEPLOYING TO REAL NET: ", chainId);
         vrfCoordinatorV2Address = networkConfig[network.config.chainId!].vrfCoordinatorV2;
         subscriptionId = networkConfig[network.config.chainId!].subscriptionId;
     }
@@ -57,7 +59,7 @@ const deployMocks: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
         networkConfig[network.config.chainId!]["callbackGasLimit"],
         networkConfig[network.config.chainId!]["keepersUpdateInterval"],
     ];
-    
+
     const raffle = await deploy("Raffle", {
         from: deployer,
         args: args,

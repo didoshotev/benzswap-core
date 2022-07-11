@@ -10,7 +10,7 @@ if (!developmentChains.includes(network.name)) {
     describe.skip
 }
 
-describe("Raffle", async function () {
+describe.skip("Raffle", async function () {
     let chainId: number | undefined;
     let raffleInstance: Raffle;
     let raffleEnteranceFee: BigNumber;
