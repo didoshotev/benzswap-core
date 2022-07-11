@@ -1,5 +1,4 @@
 import { config as dotenvConfig } from "dotenv";
-import { HardhatNetworkAccountsUserConfig } from "hardhat/src/types/config";
 import { resolve } from "path";
 
 dotenvConfig({ path: resolve(__dirname, "./.env") });
@@ -9,8 +8,7 @@ type NamedAccounts<AccountName extends string = string, NetworkName extends stri
     string | number | Record<NetworkName, null | number | string>
 >;
 
-
-const accounts: HardhatNetworkAccountsUserConfig = [
+const accounts = [
     {
         privateKey: process.env.DEPLOYER_PRIVATE_KEY || "",
         balance: "10000000000000000000000",
