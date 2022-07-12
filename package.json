@@ -5,7 +5,8 @@
     "node": "npx hardhat node",
     "start-node": "npx hardhat compile && npx hardhat node",
     "deploy": "hardhat deploy --write true --network",
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "export-abi": "yarn run hardhat export-abi"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.4.1",

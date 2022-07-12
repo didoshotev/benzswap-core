@@ -14,27 +14,25 @@ import "hardhat-erc1820";
 
 import { namedAccounts } from "./hardhat.accounts";
 import { networks } from "./hardhat.network"
+// import { frontEndAbiPath } from "./helper-hardhat-config";
 
 
-const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL;
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY;
 
-
-const accounts = [
-    { privateKey: process.env.DEPLOYER_PRIVATE_KEY, balance: "10000000000000000000000" },
-    { privateKey: process.env.USER1_PRIVATE_KEY, balance: "10000000000000000000000" },
-]
 
 const config: HardhatUserConfig = {
     solidity: "0.8.7",
     defaultNetwork: "hardhat",
     namedAccounts,
     networks,
-    abiExporter: {
-        path: "./abis",
-        clear: true,
-        flat: true
-    },
+    // abiExporter: {
+    //     path: frontEndAbiPath,
+    //     runOnCompile: true,
+    //     clear: true,
+    //     flat: true,
+    //     // pretty: true,
+    //     format: "json",
+    // },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
     },
@@ -42,7 +40,8 @@ const config: HardhatUserConfig = {
         currency: "USD",
         gasPrice: 100,
         // enabled: !!process.env.REPORT_GAS,
-        enabled: true
+        enabled: true,
+        coinmarketcap: COINMARKETCAP_API_KEY
     },
     mocha: {
         timeout: 500000,
