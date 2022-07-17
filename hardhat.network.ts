@@ -24,11 +24,11 @@ export const networks: NetworksUserConfig = {
         gasPrice: 225000000000
         // blockConfirmations: 1    
     }, 
-    localhost: {
-        chainId: 1337,
-        url: "http://127.0.0.1:8545",
-        allowUnlimitedContractSize: true,
-    },
+    // localhost: {
+    //     chainId: 1337,
+    //     url: "http://127.0.0.1:8545",
+    //     allowUnlimitedContractSize: true,
+    // },
     rinkeby: { 
         chainId: 4,
         accounts: test_net_accounts,
