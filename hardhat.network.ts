@@ -8,6 +8,7 @@ export const avalancheFujiJsonRPCUrl: string =
     process.env.FUJI_RPC_URL || "https://api.avax-test.network/ext/bc/C/rpc";
 
 export const rinkebyJsonRPCUrl: string = process.env.RINKEBY_RPC_URL || ""
+export const alchemyEthereumRPCUrl: string = process.env.ALECHMY_ETHEREUM_RPC_URL || ""
 
 
 const test_net_accounts = accounts.map((account: any) => account.privateKey)
@@ -21,15 +22,15 @@ export const networks: NetworksUserConfig = {
     hardhat: {
         chainId: 31337,
         accounts,
-        gasPrice: 225000000000
+        gasPrice: 225000000000,
         // blockConfirmations: 1    
-    }, 
+    },
     // localhost: {
     //     chainId: 1337,
     //     url: "http://127.0.0.1:8545",
     //     allowUnlimitedContractSize: true,
     // },
-    rinkeby: { 
+    rinkeby: {
         chainId: 4,
         accounts: test_net_accounts,
         url: rinkebyJsonRPCUrl
@@ -39,6 +40,17 @@ export const networks: NetworksUserConfig = {
         accounts: test_net_accounts,
         url: avalancheFujiJsonRPCUrl,
     },
+}
+
+if (process.env.FORK_ENABLED) {
+    networks.hardhat = {
+        chainId: 31337,
+        accounts,
+        gasPrice: 225000000000,
+        forking: {
+            url: rinkebyJsonRPCUrl
+        }
+    }
 }
 
 // if (process.env.FORK_ENABLED) {

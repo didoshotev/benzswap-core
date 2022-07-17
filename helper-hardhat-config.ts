@@ -5,7 +5,8 @@ interface INetworkConfigItem {
     keepersUpdateInterval?: string 
     raffleEntranceFee?: string 
     callbackGasLimit?: string 
-    vrfCoordinatorV2?: string
+    vrfCoordinatorV2?: string,
+    WETH?: string
 }
 
 interface INetworkConfigInfo { 
@@ -21,6 +22,7 @@ const networkConfig:INetworkConfigInfo = {
         subscriptionId: process.env.CHAINLINK_SUBSCRIPTION_ID?.toString(),
         callbackGasLimit: "500000", // 500,000
         keepersUpdateInterval: "30",
+        WETH: "0xc778417E063141139Fce010982780140Aa0cD5Ab",
     },
     31337: { 
         name: "hardhat",
