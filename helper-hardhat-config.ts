@@ -38,7 +38,6 @@ const testnetChains = ["rinkeby", "fuji", "kovan"]
 const productionChains = ["avalanche", "ethereum"]
 
 const VERIFICATION_BLOCK_CONFIRMATIONS = 3
-const frontEndContractsFile = "../benzswap-ui/constants/contractAddresses.json"
 const frontEndAbiPath = "../benzswap-ui/constants/abi.json"
 const frontEndTypes = "../benzswap-ui/types" 
 const FRONT_END_CONSTANTS_PATH = "../benzswap-ui/constants"
@@ -51,7 +50,6 @@ export {
     VERIFICATION_BLOCK_CONFIRMATIONS,
     INetworkConfigItem,
     INetworkConfigInfo,
-    frontEndContractsFile,
     frontEndTypes,
     frontEndAbiPath,
     FRONT_END_CONSTANTS_PATH

@@ -1,4 +1,4 @@
-import { developmentChains, frontEndContractsFile, FRONT_END_CONSTANTS_PATH, productionChains, testnetChains } from "../helper-hardhat-config"
+import { developmentChains, FRONT_END_CONSTANTS_PATH, productionChains, testnetChains } from "../helper-hardhat-config"
 import fs from "fs"
 import { DeployFunction } from "hardhat-deploy/types"
 import { HardhatRuntimeEnvironment } from "hardhat/types"
@@ -12,23 +12,11 @@ import { Raffle } from "../typechain"
 const updateUI: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const { network, ethers } = hre
     const chainId = "31337"
+    console.log("Updating UI for network with ID: ", network.config.chainId)
 
     if (process.env.UPDATE_FRONT_END) {
-        console.log("Writing to front end...")
         const raffle = await ethers.getContract<Raffle>("Raffle")
-        const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, "utf8"))
-        if (chainId in contractAddresses) {
-            if (!contractAddresses[network.config.chainId!].includes(raffle.address)) {
-                contractAddresses[network.config.chainId!].push(raffle.address)
-            }
-        } else {
-            contractAddresses[network.config.chainId!] = [raffle.address]
-        }
-        fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses))
-
         let json_file;
-        console.log('network.name: ', network.name);
-
 
         if (developmentChains.includes(network.name)) {
             json_file = 'deployments.localhost.json'
@@ -46,16 +34,16 @@ const updateUI: DeployFunction = async function (hre: HardhatRuntimeEnvironment)
                 )
             )
 
-        if(!(network.name in client_json_abi)) { 
-            client_json_abi[network.name] = { }
+        if (!(network.name in client_json_abi)) {
+            client_json_abi[network.name] = {}
         }
 
-        client_json_abi[network.name]["Raffle"] = { 
+        client_json_abi[network.name]["Raffle"] = {
             address: raffle.address,
             abi: require("../artifacts/contracts/Raffle/Raffle.sol/Raffle.json").abi
         }
         fs.writeFileSync(`${FRONT_END_CONSTANTS_PATH}/deployments/${json_file}`, JSON.stringify(client_json_abi))
-        
+
         const deployments = await hre.deployments.all();
         const keys = Object.keys(deployments)
         console.log('keys: ', keys);
