@@ -7,8 +7,6 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 const BASE_FEE = ethers.utils.parseEther("0.25");
 const GAS_PRICE_LINK = 1e9 // calculated value based on the gas price of the chain
 
-const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("2")
-
 
 const deployMocks: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const { getNamedAccounts, getChainId, deployments: { log, deploy } } = hre;
