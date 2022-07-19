@@ -6,7 +6,8 @@ interface INetworkConfigItem {
     raffleEntranceFee?: string 
     callbackGasLimit?: string 
     vrfCoordinatorV2?: string,
-    WETH?: string
+    WETH?: string,
+    lendingPoolAddressesProvider?: string
 }
 
 interface INetworkConfigInfo { 
@@ -14,6 +15,18 @@ interface INetworkConfigInfo {
 }
 
 const networkConfig:INetworkConfigInfo = {
+    1: {
+        name: "ethereum",
+        // vrfCoordinatorV2: "0x6168499c0cFfCaCD319c818142124B7A15E857ab",
+        // raffleEntranceFee: "100000000000000000", // 0.1 ETH 
+        // gasLane: "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc",
+        // subscriptionId: process.env.CHAINLINK_SUBSCRIPTION_ID?.toString(),
+        // callbackGasLimit: "500000", // 500,000
+        // keepersUpdateInterval: "30",
+        WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        lendingPoolAddressesProvider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
+    },
+
     4: {
         name: "rinkeby",
         vrfCoordinatorV2: "0x6168499c0cFfCaCD319c818142124B7A15E857ab",

@@ -48,7 +48,7 @@ if (process.env.FORK_ENABLED) {
         accounts,
         gasPrice: 225000000000,
         forking: {
-            url: rinkebyJsonRPCUrl
+            url: alchemyEthereumRPCUrl
         }
     }
 }
