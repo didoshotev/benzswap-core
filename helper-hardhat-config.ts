@@ -11,10 +11,11 @@ interface INetworkConfigItem {
 }
 
 interface INetworkConfigInfo { 
-    [key: number]: INetworkConfigItem
+    // [key: string | number]: INetworkConfigItem
+    // name: keyof typeof INetworkConfigItem
 }
 
-const networkConfig:INetworkConfigInfo = {
+const networkConfig:any = {
     1: {
         name: "ethereum",
         // vrfCoordinatorV2: "0x6168499c0cFfCaCD319c818142124B7A15E857ab",
@@ -23,7 +24,9 @@ const networkConfig:INetworkConfigInfo = {
         // subscriptionId: process.env.CHAINLINK_SUBSCRIPTION_ID?.toString(),
         // callbackGasLimit: "500000", // 500,000
         // keepersUpdateInterval: "30",
+        daiEthPriceFeed: "0x773616E4d11A78F511299002da57A0a94577F1f4",
         WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        daiToken: "0x6b175474e89094c44da98b954eedeac495271d0f",
         lendingPoolAddressesProvider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5",
     },
 

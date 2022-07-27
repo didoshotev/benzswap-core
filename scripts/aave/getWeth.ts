@@ -3,36 +3,50 @@ import {
     networkConfig,
 } from "../../helper-hardhat-config"
 import * as hardhat from "hardhat"
-import { IWeth } from "../../typechain"
+import { ILendingPool, ILendingPoolAddressesProvider, IWeth } from "../../typechain"
+import { Signer } from "ethers"
+import { getNetworkConfigItem } from "../../utils/helper"
 
-const AMOUNT = ethers.utils.parseEther("50")
+export const AMOUNT_50 = ethers.utils.parseEther("50")
 
 export async function getWeth() {
     const [deployer, user1, user2] = await ethers.getSigners()
     const { network } = hardhat
     const chainId = network.config.chainId
-    if(!process.env.FORK_CHAIN_ID) { 
+    if (!process.env.FORK_CHAIN_ID) {
         console.log('Please set FORK_CHAIN_ID in .env file!');
         return
     }
-    const FORK_CHAIN_ID = +(process.env.FORK_CHAIN_ID)
-    if(!FORK_CHAIN_ID) { return }
-
-    // if (!chainId) { return; }
-    if (!networkConfig[FORK_CHAIN_ID] || !networkConfig[FORK_CHAIN_ID].WETH) { return }
     
-    
-    console.log('ADDRESS: ', networkConfig[FORK_CHAIN_ID].WETH)
+    const wethAddress = getNetworkConfigItem("WETH")
 
     // @ts-ignore
-    const iWeth = await ethers.getContractAt<IWeth>("IWeth", networkConfig[FORK_CHAIN_ID].WETH) 
+    const weth = await ethers.getContractAt<IWeth>("IWeth", wethAddress)
 
-    const deployerBalance = ethers.utils.formatUnits(await iWeth.balanceOf(deployer.address), "ether")
+    const deployerBalance = ethers.utils.formatUnits(await weth.balanceOf(deployer.address), "ether")
     console.log('deployerBalance before: ', deployerBalance);
 
-    const tx = await iWeth.connect(deployer).deposit({ value: AMOUNT })
+    const tx = await weth.connect(deployer).deposit({ value: AMOUNT_50 })
     await tx.wait(1)
 
-    const deployerBalanceAfter = ethers.utils.formatUnits(await iWeth.balanceOf(deployer.address), "ether")
+    const deployerBalanceAfter = ethers.utils.formatUnits(await weth.balanceOf(deployer.address), "ether")
     console.log('deployerBalance after: ', deployerBalanceAfter)
+}
+
+export async function getLendingPool(signer: Signer): Promise<ILendingPool | null>  {
+    if (!process.env.FORK_CHAIN_ID) {
+        console.log('Please set FORK_CHAIN_ID in .env file!');
+        return null
+    }
+
+    const lendingPoolAddressProviderAddress = getNetworkConfigItem('lendingPoolAddressesProvider')
+
+    const lendingPoolAddressProvider = await ethers.getContractAt<ILendingPoolAddressesProvider>(
+        'ILendingPoolAddressesProvider',
+        // @ts-ignore
+        lendingPoolAddressProviderAddress,
+        signer
+    )
+    const lendingPoolAddress = await lendingPoolAddressProvider.getLendingPool()
+    return await ethers.getContractAt<ILendingPool>("ILendingPool", lendingPoolAddress, signer)
 }
