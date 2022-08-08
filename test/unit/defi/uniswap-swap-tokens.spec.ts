@@ -14,7 +14,7 @@ if (!developmentChains.includes(network.name)) {
     describe.skip
 }
 
-describe("Uniswap Swap Tokens", function () {
+describe.skip("Uniswap Swap Tokens", function () {
     let chainId: number | undefined;
     let UniswapV2: UniswapV2;
     let wbtc_whale: SignerWithAddress;
