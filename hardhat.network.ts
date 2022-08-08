@@ -52,23 +52,3 @@ if (process.env.FORK_ENABLED) {
         }
     }
 }
-
-// if (process.env.FORK_ENABLED) {
-//     networks.hardhat = {
-//         chainId: 1337,
-//         allowUnlimitedContractSize: true,
-//         gas: 12000000,
-//         blockGasLimit: 0x1fffffffffffff,
-//         forking: {
-//             url: process.env.FORK_TESTNET ? avalancheFujiJsonRPCUrl : avalancheMainnetJsonRPCUrl,
-//         },
-//         accounts,
-//     };
-// } else {
-//     networks.hardhat = {
-//         allowUnlimitedContractSize: true,
-//         gas: 12000000,
-//         blockGasLimit: 0x1fffffffffffff,
-//         accounts,
-//     };
-// }

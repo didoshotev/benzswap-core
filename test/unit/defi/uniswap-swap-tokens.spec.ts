@@ -48,17 +48,11 @@ describe("Uniswap Swap Tokens", function () {
             params: [WBTC_WHALE],
         });
         wbtc_whale = await ethers.getSigner(WBTC_WHALE);
-        await deployer.sendTransaction({ 
+        await deployer.sendTransaction({
             to: wbtc_whale.address,
             value: ethers.utils.parseEther('200')
         })
-        let wbtc_whale_eth_value = await wbtc_whale.getBalance(wbtc_whale.address)
-        console.log('wbtc_whale_eth_value: ', ethers.utils.formatEther(wbtc_whale_eth_value));
     })
-
-    // beforeEach(async function () {
-       
-    // })
 
     it("Should swap tokens", async function () {
         const amount5 = ethers.utils.parseUnits("5", 8)
@@ -72,13 +66,15 @@ describe("Uniswap Swap Tokens", function () {
         const swapTx = await UniswapV2.connect(wbtc_whale).swap(
             WBTC_Instance.address,
             DAI_Instance.address,
-            1,
+            amount5,
             1,
             deployer.address,
         )
-
         const receipt = await swapTx.wait()
-        console.log('receipt: ', receipt);
-        expect(1).equal(1)
+
+        const whale_wbtc_balance_after = await WBTC_Instance.balanceOf(wbtc_whale.address)
+        console.log('whale_wbtc_balance: ', ethers.utils.formatUnits(whale_wbtc_balance_after, 8));
+        expect(+ethers.utils.formatEther(whale_wbtc_balance)).to.be
+        .greaterThan(+ethers.utils.formatEther(whale_wbtc_balance_after))
     })
 })
