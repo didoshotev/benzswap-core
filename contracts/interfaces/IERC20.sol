@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: agpl-3.0
-pragma solidity 0.6.12;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
 
 interface IERC20 {
   function allowance(address owner, address spender) external view returns (uint256 remaining);
