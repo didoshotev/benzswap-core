@@ -36,7 +36,7 @@ async function main() {
     const amountDaiToBorrowWei = ethers.utils.parseEther(amountDaiToBorrow.toString())
     // console.log(`You can borrow ${amountDaiToBorrow.toString()} DAI`)
 
-    const daiAddress = getNetworkConfigItem('daiToken')
+    const daiAddress = getNetworkConfigItem('DAI')
 
     await borrowDai(daiAddress, lendingPool, amountDaiToBorrowWei, deployer.address)
     console.log('-------------------------------');

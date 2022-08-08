@@ -1,7 +1,7 @@
 import { ethers } from "hardhat"
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Raffle } from "../typechain";
-const raffle_abi = require("../abi/Raffle_abi.json") 
+import * as raffle_abi from "../abi/Raffle_abi.json" 
 import { RAFFLE_ADDRESS_RINKEBY } from "../utils/constants"
 const hre: HardhatRuntimeEnvironment = require("hardhat")
 

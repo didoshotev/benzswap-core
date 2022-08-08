@@ -47,7 +47,7 @@ const config: HardhatUserConfig = {
         currency: "USD",
         gasPrice: 100,
         // enabled: !!process.env.REPORT_GAS,
-        enabled: true,
+        enabled: false,
         coinmarketcap: COINMARKETCAP_API_KEY
     },
     mocha: {

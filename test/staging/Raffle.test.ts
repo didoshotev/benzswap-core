@@ -4,7 +4,7 @@ import { deployments, ethers, network } from "hardhat";
 import { Raffle, VRFCoordinatorV2Mock } from "../../typechain";
 import { developmentChains, networkConfig } from "../../helper-hardhat-config"
 import { BigNumber } from "ethers";
-const raffle_abi = require("../../abi/Raffle_abi.json") 
+import * as raffle_abi from "../../abi/Raffle_abi.json" 
 import { RAFFLE_ADDRESS_RINKEBY } from "../../utils/constants"
 
 
@@ -13,7 +13,7 @@ if (!(network.config.chainId && network.config.chainId in networkConfig)) {
     describe.skip
 }
 
-describe("Raffle", async function () {
+describe.skip("Raffle", async function () {
     let chainId: number | undefined;
     let raffle: Raffle;
     let raffleEnteranceFee: BigNumber;
