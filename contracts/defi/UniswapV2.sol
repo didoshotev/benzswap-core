@@ -99,4 +99,14 @@ contract UniswapV2 {
         emit Log("amountA", amountA);
         emit Log("amountB", amountB);
     }
+
+    // function uniswapV2Call(
+    //     address _sender,
+    //     uint256 _amount0,
+    //     uint256 _amount1,
+    //     bytes calldata _data
+    // ) external override {
+    //     address token0 = IUniswapV2Pair(msg.sender).token0();
+    //     address token1 = IUniswapV2Pair(msg.sender).token1();
+    // }
 }
